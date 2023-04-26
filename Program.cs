@@ -22,6 +22,8 @@ namespace PROG6221_Part1
             //method converts the user input read using console.readline into an integer value and is assigned to the variable numSteps
             int numSteps = int.Parse(Console.ReadLine());
 
+            //object to create instance of the Recipe class,constructor takes two integer arguments numIngredients and numSteps
+            Recipe recipe = new Recipe(numIngredients, numSteps);
 
             //for loop to get the details of ingredients from the user 
             for (int i = 0; i < numIngredients; i++)
@@ -45,6 +47,8 @@ namespace PROG6221_Part1
                 Console.WriteLine($"\nEnter step and description{i + 1}: "); //prompt user to enter a description for each step that the user inputs to the for loop
                 string step = Console.ReadLine();
 
+                //Object to call the method AddStep from the Recipe class, takes two arguments 
+                recipe.AddStep(i, step);
 
             }
 
