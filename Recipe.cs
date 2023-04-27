@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PROG6221_Part1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,52 +9,61 @@ namespace PROG6221_Part1
 {
     internal class Recipe
     {
-        public int NumIngredients { get; set; }
-        public Ingredient[] Ingredients { get; set; }
-        public int NumSteps { get; set; }
-        public string[] Steps { get; set; }
-        public double[] OriginalQuantities { get; set; }
+       
+        public int NumIngredients { get; set; }  //public integer variable representing the number of ingredients required for the recipe.
+                                                 //get and set modifyers allow the variable to be read and modified from outside the class.
+        public Ingredient[] Ingredients { get; set; } //public array to store the ingredients of the recipe
+                                                      //get and set modifyers allow the variable to be read and modified from outside the class.
+        public int NumSteps { get; set; } //public integer variable to store the number of steps for the recipe 
+                                          //get and set modifyers allow the variable to be read and modified from outside the class.
+        public string[] Steps { get; set;} //public stirng array to store the description of the steps for the recipe.
+                                           //get and set modifyers allow the variable to be read and modified from outside the class.
 
-        public Recipe(int numIngredients, int numSteps)
+
+        public Recipe(int numIngredients, int numSteps) //constructor takes two integers as arguments 
         {
-            NumIngredients = numIngredients;
-            Ingredients = new Ingredient[numIngredients];
-            NumSteps = numSteps;
-            Steps = new string[numSteps];
+            NumIngredients = numIngredients; // integer variable NumIngredients set as the variable numIngredients 
+            Ingredients = new Ingredient[numIngredients];//Ingredients initialized as new array, numIngredients defines the type and the length of the array
+            NumSteps = numSteps;   // integer variable NumSteps set as the variable numSteps
+            Steps = new string[numSteps]; // Creates a new array of strings with the specified size
+        
         }
 
-        public void AddIngredient(int index, string name, double quantity, string unit)
+        public void AddIngredient(int index, string name, double quantity, string unit)// Method that adds a new ingredient to the Ingredients array at the specified index
         {
-            Ingredients[index] = new Ingredient(name, quantity, unit);
+            Ingredients[index] = new Ingredient(name, quantity, unit); // Creates a new Ingredient object with the specified properties and assigns it to the specified index in the Ingredients array
         }
 
-        public void AddStep(int index, string description)
+        public void AddStep(int index, string description) // Method that adds a new step to the Steps array at the specified index
         {
-            Steps[index] = description;
+            Steps[index] = description;  // Assigns the specified description string to the specified index in the Steps array
 
         }
 
-        public void ScaleRecipe(double factor)
+        public void ScaleRecipe(double factor)// Method that scales the quantities of all ingredients in the recipe by the specified factor
         {
-            foreach (Ingredient ingredient in Ingredients)
+            foreach (Ingredient ingredient in Ingredients) // Iterates over each Ingredient object in the Ingredients array
             {
-                ingredient.Quantity *= factor;
+                ingredient.Quantity *= factor; // Multiplies the Quantity property of each Ingredient by the specified factor
             }
         }
 
-        public void PrintRecipe()
+        public void PrintRecipe()// Method that prints the recipe to the console
         {
-            Console.WriteLine("Ingredients:");
-            foreach (Ingredient ingredient in Ingredients)
+            Console.WriteLine("Ingredients:");  // Outputs the header for the list of ingredients
+            foreach (Ingredient ingredient in Ingredients)  // Iterates over each Ingredient object in the Ingredients array
             {
-                Console.WriteLine($" {ingredient.Quantity} {ingredient.Unit} {ingredient.Name}");
+                Console.WriteLine($" {ingredient.Quantity} {ingredient.Unit} {ingredient.Name}"); // Outputs the Quantity, Unit, and Name properties of each Ingredient in a formatted string
             }
 
-            Console.WriteLine("\nSteps:");
-            for (int i = 0; i < Steps.Length; i++)
+            Console.WriteLine("\nSteps:"); // Outputs the header for the list of steps
+            for (int i = 0; i < Steps.Length; i++)  // Iterates over each element in the Steps array using a for loop with an index variable
             {
-                Console.WriteLine($"\n {i + 1}. {Steps[i]}. ");//orders steps in a numeric list 
+                Console.WriteLine($"\n {i + 1}. {Steps[i]}. ");//orders steps in a numbered list 
             }
         }
     }
 }
+
+
+
