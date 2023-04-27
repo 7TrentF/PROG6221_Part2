@@ -30,6 +30,30 @@ namespace PROG6221_Part1
         public void AddStep(int index, string description)
         {
             Steps[index] = description;
+
+        }
+
+        public void ScaleRecipe(double factor)
+        {
+            foreach (Ingredient ingredient in Ingredients)
+            {
+                ingredient.Quantity *= factor;
+            }
+        }
+
+        public void PrintRecipe()
+        {
+            Console.WriteLine("Ingredients:");
+            foreach (Ingredient ingredient in Ingredients)
+            {
+                Console.WriteLine($" {ingredient.Quantity} {ingredient.Unit} {ingredient.Name}");
+            }
+
+            Console.WriteLine("\nSteps:");
+            for (int i = 0; i < Steps.Length; i++)
+            {
+                Console.WriteLine($"\n {i + 1}. {Steps[i]}. ");//orders steps in a numeric list 
+            }
         }
     }
 }
