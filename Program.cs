@@ -18,13 +18,13 @@ namespace PROG6221_Part1
                 string recipeName = Console.ReadLine();  //reads user input and assignes input to the variable recipeName
 
                 //prompt user to enter the number of  ingredients
-                Console.WriteLine("Enter the number of ingredients:");
+                Console.WriteLine("\nEnter the number of ingredients:");
 
                 //method converts the user input read using console.readline into an integer value and is assigned to the variable numIngredients
                 int numIngredients = int.Parse(Console.ReadLine());
 
                 //prompt user to enter the number of steps 
-                Console.WriteLine("Enter the number of steps:");
+                Console.WriteLine("\nEnter the number of steps:");
                 //method converts the user input read using console.readline into an integer value and is assigned to the variable numSteps
                 int numSteps = int.Parse(Console.ReadLine());
 
@@ -60,11 +60,9 @@ namespace PROG6221_Part1
 
                 }
 
-                Console.WriteLine("\n---------------------------------------" +
-                                    $"\nRecipe to make: {recipeName} \n" +
-                                    "---------------------------------------");
+              
                 recipe.PrintRecipe();
-                Console.WriteLine("---------------------------------------");
+              
 
                 Console.WriteLine("\nDo you want to scale the recipe? (y/n)");
                 string answer = Console.ReadLine().ToLower();
@@ -91,7 +89,7 @@ namespace PROG6221_Part1
                     recipe.ResetQuantities();
 
                     Console.WriteLine("\n The recipe quantities have been reset to their original values:");
-                    recipe.PrintRecipe();
+                    //recipe.PrintRecipe();
                 }
 
                 Console.WriteLine("\nDo you want to enter a new recipe? (y/n)");
@@ -99,13 +97,10 @@ namespace PROG6221_Part1
 
                 if (answer == "n")
                 {
-                    break;
-                  
+                    break; 
                 }
-                
 
                 recipe.ClearRecipe();
-
                 Console.ReadLine();
             }
         }
