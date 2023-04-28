@@ -60,48 +60,47 @@ namespace PROG6221_Part1
 
                 }
 
-              
-                recipe.PrintRecipe();
-              
+
+                recipe.PrintRecipe(); // calls PrintRecipe method from Recipe class and prints the current recipe to the console.
 
                 Console.WriteLine("\nDo you want to scale the recipe? (y/n)");
-                string answer = Console.ReadLine().ToLower();
-
+                string answer = Console.ReadLine().ToLower(); // Asks the user if they want to scale the recipe and reads their response.
 
                 if (answer == "y")
                 {
                     Console.WriteLine("Enter the scaling factor: " +
-                                      "\n0.5 (Half) \n  2 (Double, or \n  3 (Triple):");
+                                      "\n0.5 (Half) \n  2 (Double, or \n  3 (Triple): \n"); // Asks the user to enter a scaling factor.
 
-                    double factor = double.Parse(Console.ReadLine());
+                    double factor = double.Parse(Console.ReadLine()); // Reads the user's input and parses it as a double.
 
-                    recipe.ScaleRecipe(factor);
+                    recipe.ScaleRecipe(factor); // Scales the recipe by the given factor.
 
                     Console.WriteLine("\nScaled Recipe:");
-                    recipe.PrintRecipe();
+                    recipe.PrintRecipe(); // Prints the scaled recipe to the console.
                 }
 
                 Console.WriteLine("Do you want to reset the quantities to the original values? (y/n)");
-                answer = Console.ReadLine().ToLower();
+                answer = Console.ReadLine().ToLower(); // Asks the user if they want to reset the recipe to its original quantities and reads their response.
 
                 if (answer == "y")
                 {
-                    recipe.ResetQuantities();
+                    recipe.ResetQuantities(); // Resets the recipe to its original quantities.
 
                     Console.WriteLine("\n The recipe quantities have been reset to their original values:");
                     //recipe.PrintRecipe();
                 }
 
                 Console.WriteLine("\nDo you want to enter a new recipe? (y/n)");
-                answer = Console.ReadLine().ToLower();
+                answer = Console.ReadLine().ToLower(); // Asks the user if they want to enter a new recipe and reads their response.
 
                 if (answer == "n")
                 {
-                    break; 
+                    break; // If the user doesn't want to enter a new recipe, exits the loop.
                 }
 
-                recipe.ClearRecipe();
-                Console.ReadLine();
+                recipe.ClearRecipe(); // Clears the current recipe.
+                Console.ReadLine(); // Reads the user's input to pause the program. 
+
             }
         }
     }

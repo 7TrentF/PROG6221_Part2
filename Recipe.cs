@@ -18,20 +18,29 @@ namespace PROG6221_Part1
                                           //get and set modifyers allow the variable to be read and modified from outside the class.
         public string[] Steps { get; set;} //public stirng array to store the description of the steps for the recipe.
                                            //get and set modifyers allow the variable to be read and modified from outside the class.
-
         public double[] OriginalQuantities { get; set; }
+       
         public Recipe(int numIngredients, int numSteps) //constructor takes two integers as arguments 
         {
-            NumIngredients = numIngredients; // integer variable NumIngredients set as the variable numIngredients 
-            Ingredients = new Ingredient[numIngredients];//Ingredients initialized as new array, numIngredients defines the type and the length of the array
-            NumSteps = numSteps;   // integer variable NumSteps set as the variable numSteps
-            Steps = new string[numSteps]; // Creates a new array of strings with the specified size
+            NumIngredients = numIngredients;                 // integer variable NumIngredients set as the variable numIngredients 
+            Ingredients = new Ingredient[numIngredients];     //Ingredients initialized as new array, numIngredients defines the type and the length of the array
+            NumSteps = numSteps;                              // integer variable NumSteps set as the variable numSteps
+            Steps = new string[numSteps];                     // Creates a new array of strings with the specified size
             OriginalQuantities = new double[numIngredients]; // initialize OriginalQuantities array
+
+            for (int i = 0; i < numIngredients; i++)
+            {
+                OriginalQuantities[i] = 0.0;
+
+            }
         }
+
+
 
         public void AddIngredient(int index, string name, double quantity, string unit)// Method that adds a new ingredient to the Ingredients array at the specified index
         {
             Ingredients[index] = new Ingredient(name, quantity, unit); // Creates a new Ingredient object with the specified properties and assigns it to the specified index in the Ingredients array
+            OriginalQuantities[index] = quantity;
         }
 
         public void AddStep(int index, string description) // Method that adds a new step to the Steps array at the specified index
@@ -40,13 +49,24 @@ namespace PROG6221_Part1
 
         }
 
-        public void ScaleRecipe(double factor)// Method that scales the quantities of all ingredients in the recipe by the specified factor
+        public void ScaleRecipe(double factor)
         {
-            for (int i = 0; i < Ingredients.Length; i++) // Iterates over each Ingredient object in the Ingredients array
+            if (factor == 0.5) // If the factor is 0.5, multiply by 0.5 instead of the input factor
             {
-                Ingredients[i].Quantity *= factor; // Multiplies the Quantity property of each Ingredient by the specified factor
+                for (int i = 0; i < Ingredients.Length; i++)
+                {
+                    Ingredients[i].Quantity *= 0.5;
+                }
+            }
+            else // For all other factors, multiply by the input factor
+            {
+                for (int i = 0; i < Ingredients.Length; i++)
+                {
+                    Ingredients[i].Quantity *= factor;
+                }
             }
         }
+
 
         public void PrintRecipe()// Method that prints the recipe to the console
         {
@@ -55,9 +75,13 @@ namespace PROG6221_Part1
                                  "---------------------------------------");
 
             Console.WriteLine("Ingredients:");  // Outputs the header for the list of ingredients
-            foreach (Ingredient ingredient in Ingredients)  // Iterates over each Ingredient object in the Ingredients array
             {
-                Console.WriteLine($" {ingredient.Quantity} {ingredient.Unit} {ingredient.Name}"); // Outputs the Quantity, Unit, and Name properties of each Ingredient in a formatted string
+                for (int i = 0; i < Ingredients.Length; i++) // Iterate over each Ingredient object in the Ingredients array using a for loop
+                {
+                    Ingredient ingredient = Ingredients[i]; // Get the current Ingredient object
+
+                    Console.WriteLine($" {ingredient.Quantity} {ingredient.Unit} {ingredient.Name}"); // Outputs the Quantity, Unit, and Name properties of the current Ingredient in a formatted string
+                }
             }
 
             Console.WriteLine("\nSteps:"); // Outputs the header for the list of steps
@@ -70,18 +94,35 @@ namespace PROG6221_Part1
 
         public void ResetQuantities() // Method that resets the quantities of all ingredients in the recipe to their original values
         {
-            // Loop through each ingredient in the recipe
-            for (int i = 0; i < NumIngredients; i++)
+            for (int i = 0; i < Ingredients.Length; i++) // Loop through each ingredient in the recipe
             {
-                // Set the quantity of the current ingredient to its original quantity
-                Ingredients[i].Quantity = OriginalQuantities[i];
+                Ingredients[i].Quantity = OriginalQuantities[i]; // Set the quantity of the current Ingredient object to its original value
             }
+
+            Console.WriteLine("\nOriginal Quantities:");
+            for (int i = 0; i < OriginalQuantities.Length; i++)
+            {
+
+                Console.WriteLine($"{OriginalQuantities[i]}" + $"{Ingredients[i].Unit}" +  $"{Ingredients[i].Name}" );
+            }
+
         }
+
         public void ClearRecipe()  // Method that clears the recipe by creating new empty arrays for Ingredients and Steps
         {
             Ingredients = new Ingredient[NumIngredients]; //Creates a new array of Ingredient objects with the same length as the original array
             Steps = new string[NumSteps];  // Creates a new array of string objects with the same length as the original array
+
+            for (int i = 0; i < NumIngredients; i++)
+            {
+                OriginalQuantities[i] = 0.0;
+            }
         }
     }
 }
+
+
+
+
+
 
