@@ -19,14 +19,14 @@ namespace PROG6221_Part1
         public string[] Steps { get; set;} //public stirng array to store the description of the steps for the recipe.
                                            //get and set modifyers allow the variable to be read and modified from outside the class.
 
-
+        public double[] OriginalQuantities { get; set; }
         public Recipe(int numIngredients, int numSteps) //constructor takes two integers as arguments 
         {
             NumIngredients = numIngredients; // integer variable NumIngredients set as the variable numIngredients 
             Ingredients = new Ingredient[numIngredients];//Ingredients initialized as new array, numIngredients defines the type and the length of the array
             NumSteps = numSteps;   // integer variable NumSteps set as the variable numSteps
             Steps = new string[numSteps]; // Creates a new array of strings with the specified size
-        
+            OriginalQuantities = new double[numIngredients]; // initialize OriginalQuantities array
         }
 
         public void AddIngredient(int index, string name, double quantity, string unit)// Method that adds a new ingredient to the Ingredients array at the specified index
@@ -62,8 +62,22 @@ namespace PROG6221_Part1
                 Console.WriteLine($"\n {i + 1}. {Steps[i]}. ");//orders steps in a numbered list 
             }
         }
+
+        public void ResetQuantities()
+        {
+
+            for (int i = 0; i < NumIngredients; i++)
+            {
+                Ingredients[i].Quantity = OriginalQuantities[i];
+
+            }
+
+        }
+        public void ClearRecipe()
+        {
+            Ingredients = new Ingredient[NumIngredients];
+            Steps = new string[NumSteps];
+        }
     }
 }
-
-
 

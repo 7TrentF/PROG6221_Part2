@@ -1,0 +1,8 @@
+C:\Users\lab_services_student\source\repos\PROG6221_Part1\bin\Debug\PROG6221_Part1.exe.config
+C:\Users\lab_services_student\source\repos\PROG6221_Part1\bin\Debug\PROG6221_Part1.exe
+C:\Users\lab_services_student\source\repos\PROG6221_Part1\bin\Debug\PROG6221_Part1.pdb
+C:\Users\lab_services_student\source\repos\PROG6221_Part1\obj\Debug\PROG6221_Part1.csproj.AssemblyReference.cache
+C:\Users\lab_services_student\source\repos\PROG6221_Part1\obj\Debug\PROG6221_Part1.csproj.SuggestedBindingRedirects.cache
+C:\Users\lab_services_student\source\repos\PROG6221_Part1\obj\Debug\PROG6221_Part1.csproj.CoreCompileInputs.cache
+C:\Users\lab_services_student\source\repos\PROG6221_Part1\obj\Debug\PROG6221_Part1.exe
+C:\Users\lab_services_student\source\repos\PROG6221_Part1\obj\Debug\PROG6221_Part1.pdb
