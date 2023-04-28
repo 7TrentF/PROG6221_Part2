@@ -120,7 +120,7 @@ accessed: 24 april 2023
             for (int i = 0; i < OriginalQuantities.Length; i++)
             {
                 // Use string interpolation to format the output string
-                Console.WriteLine($"{OriginalQuantities[i]}" + $"\n{Ingredients[i].Unit}" + $"\n{Ingredients[i].Name}");
+                Console.WriteLine($"{OriginalQuantities[i]} " + $"{Ingredients[i].Unit} " + $"{Ingredients[i].Name}");
             }
 
         }

@@ -31,6 +31,7 @@ namespace PROG6221_Part1
                 //object to create instance of the Recipe class,constructor takes two integer arguments numIngredients and numSteps
                 Recipe recipe = new Recipe(numIngredients, numSteps);
 
+               
                 //for loop to get the details of ingredients from the user, loops as many times as the user defines
                 for (int i = 0; i < numIngredients; i++)
                 {
@@ -45,7 +46,6 @@ namespace PROG6221_Part1
                     string unit = Console.ReadLine();                                  //reads user input and assignes input to the variable unit 
 
                     recipe.AddIngredient(i, name, quantity, unit);
-
                 }
 
                
@@ -62,6 +62,12 @@ namespace PROG6221_Part1
 
 
                 recipe.PrintRecipe(); // calls PrintRecipe method from Recipe class and prints the current recipe to the console.
+
+ /*
+Author: Doyle, B. (2016) 
+title of the book: C♯ Programming: From problem analysis to program design. Boston, MA: Cengage Learning. 
+accessed:  25 april 2023
+*/
 
                 Console.WriteLine("\nDo you want to scale the recipe? (y/n)");
                 string answer = Console.ReadLine().ToLower(); // Asks the user if they want to scale the recipe and reads their response.
@@ -90,15 +96,18 @@ namespace PROG6221_Part1
                     //recipe.PrintRecipe();
                 }
 
+                recipe.ClearRecipe(); // Clears the current recipe.
+
                 Console.WriteLine("\nDo you want to enter a new recipe? (y/n)");
                 answer = Console.ReadLine().ToLower(); // Asks the user if they want to enter a new recipe and reads their response.
 
                 if (answer == "n")
                 {
+                   
                     break; // If the user doesn't want to enter a new recipe, exits the loop.
                 }
 
-                recipe.ClearRecipe(); // Clears the current recipe.
+             
                 Console.ReadLine(); // Reads the user's input to pause the program. 
 
             }
