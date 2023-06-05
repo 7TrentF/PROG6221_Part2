@@ -9,31 +9,27 @@ namespace PROG6221_Part1
 {
     internal class Recipe
     {
-       
-        public int NumIngredients { get; set; }  //public integer variable representing the number of ingredients required for the recipe.
-                                                 //get and set modifyers allow the variable to be read and modified from outside the class.
-        public Ingredient[] Ingredients { get; set; } //public array to store the ingredients of the recipe
+
+        public string RecipeName { get; set; }
+        public List<Ingredient> Ingredients { get; set; } 
+                                                           //get and set modifyers allow the variable to be read and modified from outside the class.
+       //public array to store the ingredients of the recipe
                                                       //get and set modifyers allow the variable to be read and modified from outside the class.
-        public int NumSteps { get; set; } //public integer variable to store the number of steps for the recipe 
-                                          //get and set modifyers allow the variable to be read and modified from outside the class.
-        public string[] Steps { get; set;} //public stirng array to store the description of the steps for the recipe.
+        public List<string> Steps { get; set; } //public integer variable to store the number of steps for the recipe 
+                                                //get and set modifyers allow the variable to be read and modified from outside the class.
+        //public stirng array to store the description of the steps for the recipe.
                                            //get and set modifyers allow the variable to be read and modified from outside the class.
-        public double[] OriginalQuantities { get; set; } //public double array to store the original quantities of each ingredient
+        public List<double> OriginalQuantities { get; set; }
+        //public double array to store the original quantities of each ingredient
 
- 
-        public Recipe(int numIngredients, int numSteps) //constructor takes two integers as arguments 
+
+        public Recipe(string recipeName) //constructor takes two integers as arguments 
         {
-            NumIngredients = numIngredients;                 // integer variable NumIngredients set as the variable numIngredients 
-            Ingredients = new Ingredient[numIngredients];     //Ingredients initialized as new array, numIngredients defines the type and the length of the array
-            NumSteps = numSteps;                              // integer variable NumSteps set as the variable numSteps
-            Steps = new string[numSteps];                     // Creates a new array of strings with the specified size
-            OriginalQuantities = new double[numIngredients]; // initialize OriginalQuantities array
-
-            for (int i = 0; i < numIngredients; i++) // for loop initializes each element in the OriginalQuantities array to 0.0,
-            {
-                OriginalQuantities[i] = 0.0;
-
-            }
+            RecipeName = recipeName;
+            Ingredients = new List<Ingredient>();
+            Steps = new List<string>();
+            OriginalQuantities = new List<double>();
+           
         }
 
   /*
@@ -42,15 +38,15 @@ title of the book: C♯ Programming: From problem analysis to program design. Bo
 accessed:  20 april 2023
 */
 
-        public void AddIngredient(int index, string name, double quantity, string unit)// Method that adds a new ingredient to the Ingredients array at the specified index
+        public void AddIngredient(Ingredient ingredient)// Method that adds a new ingredient to the Ingredients array at the specified index
         {
-            Ingredients[index] = new Ingredient(name, quantity, unit); // Creates a new Ingredient object with the specified properties and assigns it to the specified index in the Ingredients array
-            OriginalQuantities[index] = quantity;
+            Ingredients.Add(ingredient);
+            OriginalQuantities.Add(ingredient.Quantity);
         }
 
-        public void AddStep(int index, string description) // Method that adds a new step to the Steps array at the specified index
+        public void AddStep( string step) // Method that adds a new step to the Steps array at the specified index
         {
-            Steps[index] = description;  // Assigns the specified description string to the specified index in the Steps array
+            Steps.Add(step);  // Assigns the specified description string to the specified index in the Steps array
 
         }
 
@@ -58,25 +54,32 @@ accessed:  20 april 2023
         {
             if (factor == 0.5) // If the factor is 0.5, multiply by 0.5 instead of the input factor
             {
-                for (int i = 0; i < Ingredients.Length; i++)// loop iterates over all the ingredients in the recipe.
+                for (int i = 0; i < Ingredients.Count; i++)// loop iterates over all the ingredients in the recipe.
                 {
-                    Ingredients[i].Quantity *= 0.5; // Multiply the quantity of the current Ingredient object by 0.5
+                    Ingredients[i].Quantity = OriginalQuantities[i] / 2; // Scale down the quantity of each ingredient by half
                 }
             }
 
-            else // For all other factors, multiply by the input factor
+            else if (factor == 2) // If the scaling factor is 2 (double)
             {
-                for (int i = 0; i < Ingredients.Length; i++)
+                for (int i = 0; i < Ingredients.Count; i++)
                 {
-                    Ingredients[i].Quantity *= factor; // Multiply the quantity of the current Ingredient object by the factor
+                    Ingredients[i].Quantity = OriginalQuantities[i] * 2; // Double the quantity of each ingredient
+                }
+            }
+            else if (factor == 3) // If the scaling factor is 3 (triple)
+            {
+                for (int i = 0; i < Ingredients.Count; i++)
+                {
+                    Ingredients[i].Quantity = OriginalQuantities[i] * 3; // Triple the quantity of each ingredient
                 }
             }
         }
 
- /*John S
-https://stackoverflow.com/questions/2675196/c-sharp-method-to-scale-values
-accessed: 24 april 2023
-  */
+        /*John S
+       https://stackoverflow.com/questions/2675196/c-sharp-method-to-scale-values
+       accessed: 24 april 2023
+         */
 
 
         public void PrintRecipe()// Method that prints the recipe to the console

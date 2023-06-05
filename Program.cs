@@ -11,6 +11,8 @@ namespace PROG6221_Part1
     {
         static void Main(string[] args)
         {
+            List<Recipe> recipes = new List<Recipe>(); // List to store recipes
+
             while (true)
             {
 
@@ -29,7 +31,7 @@ namespace PROG6221_Part1
                 int numSteps = int.Parse(Console.ReadLine());
 
                 //object to create instance of the Recipe class,constructor takes two integer arguments numIngredients and numSteps
-                Recipe recipe = new Recipe(numIngredients, numSteps);
+                Recipe recipe = new Recipe(recipeName);
 
                
                 //for loop to get the details of ingredients from the user, loops as many times as the user defines
@@ -45,7 +47,9 @@ namespace PROG6221_Part1
                     Console.WriteLine($"Enter the unit of measurement for {name}: ");  //prompt user to enter unit of measurment for the ingredient
                     string unit = Console.ReadLine();                                  //reads user input and assignes input to the variable unit 
 
-                    recipe.AddIngredient(i, name, quantity, unit);
+                    Ingredient ingredient = new Ingredient(name, quantity, unit);
+                    recipe.AddIngredient(ingredient);
+                   
                 }
 
                
@@ -54,9 +58,9 @@ namespace PROG6221_Part1
                 {
                     Console.WriteLine($"\nEnter step {i + 1}: "); //prompt user to enter a description for each step that the user inputs to the for loop
                     string step = Console.ReadLine();                            //reads user input and assignes input to the variable step
+                    recipe.AddStep(step);
 
-                    
-                    recipe.AddStep(i, step); //Object to call the method AddStep from the Recipe class, takes two arguments 
+                   //Object to call the method AddStep from the Recipe class, takes two arguments 
 
                 }
 
@@ -96,6 +100,7 @@ accessed:  25 april 2023
                     //recipe.PrintRecipe();
                 }
 
+                recipes.Add(recipe);
                 recipe.ClearRecipe(); // Clears the current recipe.
 
                 Console.WriteLine("\nDo you want to enter a new recipe? (y/n)");
