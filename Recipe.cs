@@ -23,9 +23,9 @@ namespace PROG6221_Part1
         //public double array to store the original quantities of each ingredient
 
 
-        public Recipe(string recipeName) //constructor takes two integers as arguments 
+        public Recipe() //constructor takes two integers as arguments 
         {
-            RecipeName = recipeName;
+            
             Ingredients = new List<Ingredient>();
             Steps = new List<string>();
             OriginalQuantities = new List<double>();
@@ -37,6 +37,91 @@ namespace PROG6221_Part1
       title of the book: C♯ Programming: From problem analysis to program design. Boston, MA: Cengage Learning. pg 204 -215 & 400-430
       accessed:  20 april 2023
       */
+
+        
+    public void EnterRecipes()
+        {
+            List<Recipe> recipes = new List<Recipe>(); // List to store recipes
+
+            while (true)
+            {
+                Console.WriteLine("What is the name of the recipe: ");
+                string recipeName = Console.ReadLine();
+
+                Console.WriteLine("\nEnter the number of ingredients:");
+                int numIngredients = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("\nEnter the number of steps:");
+                int numSteps = int.Parse(Console.ReadLine());
+
+                Recipe recipe = new Recipe(recipeName);
+
+                for (int i = 0; i < numIngredients; i++)
+                {
+                    Console.WriteLine($"\nEnter the name of ingredient {i + 1}: ");
+                    string name = Console.ReadLine();
+
+                    Console.WriteLine($"Enter the quantity of {name}: ");
+                    double quantity = double.Parse(Console.ReadLine());
+
+                    Console.WriteLine($"Enter the unit of measurement for {name}: ");
+                    string unit = Console.ReadLine();
+
+                    Ingredient ingredient = new Ingredient(name, quantity, unit);
+                    recipe.AddIngredient(ingredient);
+                }
+
+                for (int i = 0; i < numSteps; i++)
+                {
+                    Console.WriteLine($"\nEnter step {i + 1}: ");
+                    string step = Console.ReadLine();
+                    recipe.AddStep(step);
+                }
+
+                recipe.PrintRecipe();
+
+                Console.WriteLine("\nDo you want to scale the recipe? (y/n)");
+                string answer = Console.ReadLine().ToLower();
+
+                if (answer == "y")
+                {
+                    Console.WriteLine("Enter the scaling factor: " +
+                                      "\n0.5 (Half) \n  2 (Double) \n  3 (Triple): \n");
+
+                    double factor = double.Parse(Console.ReadLine());
+                    recipe.ScaleRecipe(factor);
+
+                    Console.WriteLine("\nScaled Recipe:");
+                    recipe.PrintRecipe();
+                }
+
+                Console.WriteLine("Do you want to reset the quantities to the original values? (y/n)");
+                answer = Console.ReadLine().ToLower();
+
+                if (answer == "y")
+                {
+                    recipe.ResetQuantities();
+
+                    Console.WriteLine("\nThe recipe quantities have been reset to their original values:");
+                    recipe.PrintRecipe();
+                }
+
+                recipes.Add(recipe);
+
+                Console.WriteLine("\nDo you want to enter another recipe? (y/n)");
+                answer = Console.ReadLine().ToLower();
+
+                if (answer == "n")
+                {
+                    break;
+                }
+            }
+        }
+
+
+
+
+
 
         public void AddIngredient(Ingredient ingredient)// Method that adds a new ingredient to the Ingredients array at the specified index
         {
