@@ -38,8 +38,30 @@ namespace PROG6221_Part1
       accessed:  20 april 2023
       */
 
-        
-    public void EnterRecipes()
+        public static void DisplayRecipes(List<Recipe> recipes)
+        {
+            if (recipes.Count == 0)
+            {
+                Console.WriteLine("No recipes available.");
+                return;
+            }
+
+            Console.WriteLine("List of Recipes:");
+            recipes.Sort((r1, r2) => string.Compare(r1.RecipeName, r2.RecipeName)); // Sort the recipes list in alphabetical order by name
+
+            foreach (Recipe recipe in recipes)
+            {
+                Console.WriteLine(recipe.RecipeName);
+            }
+        }
+
+
+        public void SetName(string name)
+        {
+            RecipeName = name;
+        }
+
+        public void EnterRecipes()
         {
             List<Recipe> recipes = new List<Recipe>(); // List to store recipes
 
@@ -54,7 +76,7 @@ namespace PROG6221_Part1
                 Console.WriteLine("\nEnter the number of steps:");
                 int numSteps = int.Parse(Console.ReadLine());
 
-                Recipe recipe = new Recipe(recipeName);
+                Recipe recipe = new Recipe();
 
                 for (int i = 0; i < numIngredients; i++)
                 {

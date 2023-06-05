@@ -12,15 +12,34 @@ namespace PROG6221_Part1
         static void Main(string[] args)
         {
             Recipe recipe = new Recipe();
-            recipe.EnterRecipes();
+
+            while (true)
+            {
+                Console.WriteLine("\nEnter 'add' to add a new recipe, 'list' to display all recipes, 'display' to view a specific recipe, or 'exit' to quit:");
+                string command = Console.ReadLine();
+
+                if (command == "add")
+                {
+                    recipe.EnterRecipes();
+                }
+                else if (command == "list")
+                {
+                    List<Recipe> recipes = new List<Recipe>();
+                    Recipe.DisplayRecipes(recipes);
+                }
+
+
+                Console.WriteLine("Enter the name of the recipe: ");
+                string name = Console.ReadLine();
+                recipe.SetName(name);
 
 
 
 
-            Console.ReadLine(); // Reads the user's input to pause the program. 
+                Console.ReadLine(); // Reads the user's input to pause the program. 
 
             }
         }
     }
-
 }
+
