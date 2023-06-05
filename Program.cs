@@ -99,9 +99,13 @@ accessed:  25 april 2023
                     Console.WriteLine("\n The recipe quantities have been reset to their original values:");
                     //recipe.PrintRecipe();
                 }
+                else
+                {
+                    recipe.ClearRecipe(); // Clears the current recipe.
 
+                }
                 recipes.Add(recipe);
-                recipe.ClearRecipe(); // Clears the current recipe.
+               
 
                 Console.WriteLine("\nDo you want to enter a new recipe? (y/n)");
                 answer = Console.ReadLine().ToLower(); // Asks the user if they want to enter a new recipe and reads their response.
