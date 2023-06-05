@@ -9,7 +9,7 @@ namespace PROG6221_Part1
 {
     internal class Recipe
     {
-
+        private List<Recipe> recipes;
         public string RecipeName { get; set; }
         public List<Ingredient> Ingredients { get; set; }
         //get and set modifyers allow the variable to be read and modified from outside the class.
@@ -29,7 +29,7 @@ namespace PROG6221_Part1
             Ingredients = new List<Ingredient>();
             Steps = new List<string>();
             OriginalQuantities = new List<double>();
-
+            recipes = new List<Recipe>();
         }
 
         /*
@@ -38,7 +38,7 @@ namespace PROG6221_Part1
       accessed:  20 april 2023
       */
 
-        public static void DisplayRecipes(List<Recipe> recipes)
+        public  void DisplayRecipes()
         {
             if (recipes.Count == 0)
             {

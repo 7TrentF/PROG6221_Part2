@@ -24,8 +24,7 @@ namespace PROG6221_Part1
                 }
                 else if (command == "list")
                 {
-                    List<Recipe> recipes = new List<Recipe>();
-                    Recipe.DisplayRecipes(recipes);
+                   recipe.DisplayRecipes();
                 }
 
 
