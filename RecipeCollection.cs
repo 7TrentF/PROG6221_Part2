@@ -58,6 +58,13 @@ namespace PROG6221_Part1
             recipes.Add(recipe);
             Console.WriteLine("Recipe added successfully!");
             Console.WriteLine("Press any key to display the commands");
+
+            // Check if the total calories exceed 300
+            int totalCalories = recipe.GetTotalCalories();
+            if (totalCalories > 300)
+            {
+                NotifyUserExceededCalories(recipe.RecipeName, totalCalories);
+            }
         }
         public void DisplayRecipeList()
         {
