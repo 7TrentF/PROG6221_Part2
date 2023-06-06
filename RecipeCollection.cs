@@ -89,5 +89,10 @@ namespace PROG6221_Part1
             recipe.DisplayRecipe();
             Console.WriteLine("Press any key to display the commands");
         }
+        // Notify the user when a recipe exceeds 300 calories
+        public void NotifyUserExceededCalories(string recipeName, int totalCalories)
+        {
+            Console.WriteLine($"Warning: The recipe '{recipeName}' has exceeded 300 calories. Total calories: {totalCalories}");
+        }
     }
 }

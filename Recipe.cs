@@ -47,7 +47,7 @@ namespace PROG6221_Part1
                 Console.WriteLine($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}");
                 Console.WriteLine($"Calories: {ingredient.Calories}");
                 Console.WriteLine($"Food Group: {ingredient.FoodGroup}");
-
+                Console.WriteLine($"Total Calories:  { GetTotalCalories ()}");
             }
 
             Console.WriteLine("\nSteps:");
@@ -55,6 +55,17 @@ namespace PROG6221_Part1
             {
                 Console.WriteLine($"{i + 1}. {Steps[i]}");
             }
+        }
+
+        // Calculate and return the total calories of all ingredients in the recipe
+           public int GetTotalCalories()
+        {
+            int totalCalories = 0;
+            foreach (Ingredient ingredient in Ingredients)
+            {
+                totalCalories += ingredient.Calories;
+            }
+            return totalCalories;
         }
 
         public void ScaleRecipe(double factor)
