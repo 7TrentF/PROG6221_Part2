@@ -32,8 +32,17 @@ namespace PROG6221_Part1
                 double quantity = double.Parse(Console.ReadLine());
 
                 Console.WriteLine($"Enter the unit of measurement for ingredient {i + 1}:");
-                string unit = Console.ReadLine();  
-            }
+                string unit = Console.ReadLine();
+
+                Console.WriteLine($"Enter the number of calories for ingredient {i + 1}:");
+                int calories = int.Parse(Console.ReadLine());
+
+                Console.WriteLine($"Enter the food group for ingredient {i + 1}:");
+                string foodGroup = Console.ReadLine();
+
+                recipe.AddIngredient(ingredientName, quantity, unit, calories, foodGroup);
+            
+        }
 
             Console.WriteLine("Enter the number of steps:");
             int numSteps = int.Parse(Console.ReadLine());
@@ -48,6 +57,7 @@ namespace PROG6221_Part1
 
             recipes.Add(recipe);
             Console.WriteLine("Recipe added successfully!");
+            Console.WriteLine("Press any key to display the commands");
         }
         public void DisplayRecipeList()
         {
@@ -65,6 +75,7 @@ namespace PROG6221_Part1
             {
                 Console.WriteLine(recipe.RecipeName);
             }
+            Console.WriteLine("Press any key to display the commands");
         }
         public void DisplayRecipe(string recipeName)
         {
@@ -76,6 +87,7 @@ namespace PROG6221_Part1
             }
 
             recipe.DisplayRecipe();
+            Console.WriteLine("Press any key to display the commands");
         }
     }
 }

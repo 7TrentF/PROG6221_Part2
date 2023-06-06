@@ -15,8 +15,9 @@ namespace PROG6221_Part1
                                               //allow the variable to be read and modified from outside the ingredient class
         public string Unit { get; set; } //public string variable to store the unit of measurement of the ingredient
                                          //allow the variable to be read and modified from outside the ingredient class
+        public int Calories { get; set; }  // Number of calories in the ingredient
+        public string FoodGroup { get; set; }  // Food group to which the ingredient belongs
 
-   
-       
+
     }
 }

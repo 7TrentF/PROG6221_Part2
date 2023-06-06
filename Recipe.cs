@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,15 +28,16 @@ namespace PROG6221_Part1
       title of the book: C♯ Programming: From problem analysis to program design. Boston, MA: Cengage Learning. pg 204 -215 & 400-430
       accessed:  20 april 2023
       */
-        public void AddIngredient(string name, double quantity, string unit)// Method that adds a new ingredient to the Ingredients array at the specified index
+        public void AddIngredient(string name, double quantity, string unit, int calories, string foodGroup)// Method that adds a new ingredient to the Ingredients array at the specified index
         {
-            Ingredients.Add(new Ingredient { Name = name, Quantity = quantity, Unit = unit});
+            Ingredients.Add(new Ingredient { Name = name, Quantity = quantity, Unit = unit, Calories = calories, FoodGroup = foodGroup });
         }
 
         public void AddStep(string step)// Method that adds a new step to the Steps array at the specified index
         {
             Steps.Add(step); // Assigns the specified description string to the specified index in the Steps array
         }
+
         public void DisplayRecipe()
         {
             Console.WriteLine($"Recipe: {RecipeName}");
@@ -43,7 +45,9 @@ namespace PROG6221_Part1
             foreach (Ingredient ingredient in Ingredients)
             {
                 Console.WriteLine($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}");
-            
+                Console.WriteLine($"Calories: {ingredient.Calories}");
+                Console.WriteLine($"Food Group: {ingredient.FoodGroup}");
+
             }
 
             Console.WriteLine("\nSteps:");

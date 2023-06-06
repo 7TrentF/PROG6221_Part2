@@ -15,7 +15,7 @@ namespace PROG6221_Part1
 
             while (true)
             {
-                Console.WriteLine("\nEnter 'add' to add a new recipe, 'list' to display all recipes, 'display' to view a specific recipe, or 'exit' to quit:");
+                Console.WriteLine("\nEnter 'add' to add a new recipe,\n'list' to display all recipes, 'display' to view a specific recipe,\n or 'exit' to quit:");
                 string command = Console.ReadLine();
 
                 if (command == "add")
@@ -26,10 +26,17 @@ namespace PROG6221_Part1
                 {
                     rc.DisplayRecipeList();
                 }
+                else if (command == "display")
+                {
+                    Console.WriteLine("Enter the name of the recipe to display:");
+                    string recipeName = Console.ReadLine();
 
-
-               
-
+                   rc.DisplayRecipe(recipeName);
+                }
+                else if (command == "exit")
+                {
+                    break;
+                }
 
 
                 Console.ReadLine(); // Reads the user's input to pause the program. 
