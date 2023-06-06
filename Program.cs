@@ -11,7 +11,7 @@ namespace PROG6221_Part1
     {
         static void Main(string[] args)
         {
-            Recipe recipe = new Recipe();
+            RecipeCollection rc = new RecipeCollection();
 
             while (true)
             {
@@ -20,18 +20,15 @@ namespace PROG6221_Part1
 
                 if (command == "add")
                 {
-                    recipe.EnterRecipes();
+                    rc.EnterRecipe();
                 }
                 else if (command == "list")
                 {
-                   recipe.DisplayRecipes();
+                    rc.DisplayRecipeList();
                 }
 
 
-                Console.WriteLine("Enter the name of the recipe: ");
-                string name = Console.ReadLine();
-                recipe.SetName(name);
-
+               
 
 
 

@@ -17,11 +17,6 @@ namespace PROG6221_Part1
                                          //allow the variable to be read and modified from outside the ingredient class
 
    
-        public Ingredient(string name, double quantity, string unit) // The constructor creates a new Ingredient object with the specified name, quantity, and unit.
-        {
-            Name = name; // Initializes the Name property with the provided name argument
-            Quantity = quantity; // Initialize the quantity property with the provided name argument
-            Unit = unit; // Initialize the unit property with the provided name argument
-        }
+       
     }
 }
