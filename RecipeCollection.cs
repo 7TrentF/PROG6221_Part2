@@ -11,16 +11,30 @@ namespace PROG6221_Part1
     {
         private List<Recipe> recipes; // Private field to store the list of recipes
 
-        
+
         public RecipeCollection()// Constructor to initialize the recipe collection
         {
             recipes = new List<Recipe>(); // Creates an empty list of recipes
         }
-       
-    /*Author: Doyle, B. (2016) 
-      title of the book: C♯ Programming: From problem analysis to program design.Boston, MA: Cengage Learning. pg 477
-      accessed:  2 june 2023
-      */
+
+        /*Author: Doyle, B. (2016) 
+          title of the book: C♯ Programming: From problem analysis to program design.Boston, MA: Cengage Learning. pg 477
+          accessed:  2 june 2023
+          */
+
+
+        // Delegate declaration for notifying the user about recipe calories
+        public delegate void NotifyUserDelegate(string recipeName, int totalCalories);
+        /*Author: Doyle, B. (2016) 
+            title of the book: C♯ Programming: From problem analysis to program design.Boston, MA: Cengage Learning. pg 686-690
+            accessed:  6 june 2023
+        */
+
+        public void HandleCalorieExceeded(string recipeName, int totalCalories)
+        {
+            Console.WriteLine($"Warning: The recipe '{recipeName}' has exceeded 300 calories. Total calories: {totalCalories}");
+        }
+
         public void EnterRecipe()
         {
             Console.WriteLine("\nEnter the name of the recipe:");
@@ -45,6 +59,9 @@ namespace PROG6221_Part1
                 Console.WriteLine($"Enter the number of calories for ingredient {i + 1}:");
                 int calories = int.Parse(Console.ReadLine()); // Read the number of calories for the ingredient from the user
 
+               
+                recipe.SetNotifyUserHandler(HandleCalorieExceeded); // Set the notification handler for calorie exceedance
+
                 Console.WriteLine($"Enter the food group for ingredient {i + 1}:");
                 string foodGroup = Console.ReadLine(); // Read the food group for the ingredient from the user
 
@@ -62,28 +79,25 @@ namespace PROG6221_Part1
 
                 recipe.AddStep(step); // Add the step to the recipe
             }
-            //scale method
-            recipe.ScaleRecipe();
+
+            recipe.ScaleRecipe(); //scale method
 
 
             recipes.Add(recipe); // Add the recipe to the list of recipes
             Console.WriteLine("Recipe added successfully!");
-           
-            // Check if the total calories exceed 300
-            int totalCalories = recipe.GetTotalCalories(); // Calculate the total calories of the recipe
 
-            if (totalCalories > 300)
-            {
-                NotifyUserExceededCalories(recipe.RecipeName, totalCalories); // Notify the user if the total calories exceed 300
-            }
+        
+
+        // Check if the total calories exceed 300
+        int totalCalories = recipe.GetTotalCalories(); // Calculate the total calories of the recipe
+
+            //if (totalCalories > 300)
+           // {
+                //NotifyUserDelegate(recipe.RecipeName, totalCalories); // Notify the user if the total calories exceed 300
+            //}
         }
 
-        // Delegate declaration for notifying the user about recipe calories
-        public delegate void NotifyUserDelegate(string recipeName, int totalCalories);
-          /*Author: Doyle, B. (2016) 
-              title of the book: C♯ Programming: From problem analysis to program design.Boston, MA: Cengage Learning. pg 686-690
-              accessed:  6 june 2023
-          */
+        
 
         // Display the list of recipes to the user
         public void DisplayRecipeList()

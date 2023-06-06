@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using static PROG6221_Part1.RecipeCollection;
 
 namespace PROG6221_Part1
 {
@@ -15,6 +17,8 @@ namespace PROG6221_Part1
         public List<string> Steps { get; set; }  // List of steps to prepare the recipe
         public List<double> OriginalQuantities { get; set; } //public double array to store the original quantities of each ingredient
        
+        private NotifyUserDelegate notifyUserHandler;
+
         public Recipe(string name) // Constructor for the Recipe class
         {                          // Initializes a new instance of the Recipe class with the specified name
 
@@ -44,6 +48,11 @@ namespace PROG6221_Part1
         public void AddStep(string step)// Method that adds a new step to the Steps array at the specified index
         {
             Steps.Add(step); // Assigns the specified description string to the specified index in the Steps array
+        }
+
+        public void SetNotifyUserHandler(NotifyUserDelegate handler)
+        {
+            notifyUserHandler = handler;
         }
 
         public void DisplayRecipe()
@@ -80,15 +89,18 @@ namespace PROG6221_Part1
                 // Iterate over each ingredient in the Ingredients list
                 for (int i = 0; i < Ingredients.Count; i++)
                 {
-                    // Retrieve the current ingredient at the index
-                    Ingredient ingredient = Ingredients[i];
+                   
+                    Ingredient ingredient = Ingredients[i];  // Retrieve the current ingredient at the index
+                    totalCalories += ingredient.Calories;  // Add the calories of the current ingredient to the total
+            }
 
-                    // Add the calories of the current ingredient to the total
-                    totalCalories += ingredient.Calories;
-                }
+            if (totalCalories > 300 && notifyUserHandler != null)
+            {
+                notifyUserHandler(RecipeName, totalCalories);
+            }
 
-                // Return the total calories
-                return totalCalories;
+            // Return the total calories
+            return totalCalories;
             }
 
         public void ScaleRecipe()
@@ -117,14 +129,16 @@ namespace PROG6221_Part1
                 {
                     for (int i = 0; i < Ingredients.Count; i++)
                     {
-                        Ingredients[i].Quantity = OriginalQuantities[i] * 2; // Double the quantity of each ingredient
+                        Ingredient ingredient = Ingredients[i];
+                        ingredient.Quantity *= 2;
                     }
                 }
                 else if (factor == 3) // If the scaling factor is 3 (triple)
                 {
                     for (int i = 0; i < Ingredients.Count; i++)
                     {
-                        Ingredients[i].Quantity = OriginalQuantities[i] * 3; // Triple the quantity of each ingredient
+                        Ingredient ingredient = Ingredients[i];
+                        ingredient.Quantity *= 3;
                     }
                     /*John S
                       https://stackoverflow.com/questions/2675196/c-sharp-method-to-scale-values
@@ -158,7 +172,7 @@ namespace PROG6221_Part1
                 string step = Steps[i]; // Retrieve the current step at the index
                 Console.WriteLine($"{i + 1}. {step}"); // Display the step number and its description
             }
-
+            Console.WriteLine("\n---------------------------------------");
         }
         public void ResetQuantities()
         {

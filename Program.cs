@@ -11,20 +11,20 @@ namespace PROG6221_Part1
     {
         static void Main(string[] args)
         {
-            RecipeCollection rc = new RecipeCollection();
+            RecipeCollection rc = new RecipeCollection();  // Create an instance of the RecipeCollection class
 
             while (true)
             {
                 Console.WriteLine("\nType 'add' to add a new recipe,\n'list' to display all recipes,\n'display' to view a specific recipe,\n or 'exit' to quit:");
-                string command = Console.ReadLine();
+                string command = Console.ReadLine();//reads user input 
 
                 if (command == "add")
                 {
-                    rc.EnterRecipe();
+                    rc.EnterRecipe();  // calls EnterRecipe method from Recipe class.
                 }
                 else if (command == "list")
                 {
-                    rc.DisplayRecipeList();
+                    rc.DisplayRecipeList();  // calls DisplayRecipeList method from Recipe class to print a a list of the recipe names in alphabetical order
                 }
                 else if (command == "display")
                 {
@@ -32,18 +32,19 @@ namespace PROG6221_Part1
                     string recipeName = Console.ReadLine();
                     Console.WriteLine();
 
-                    rc.DisplayRecipe(recipeName);
+                    rc.DisplayRecipe(recipeName);   // calls DisplayRecipeList method from Recipe class to display the recipe that the user specifies 
                 }
                 else if (command == "exit")
                 {
-                    break;
+                    break;  // Exit the loop and quit the program
                 }
+            }
 
 
-                Console.ReadLine(); // Reads the user's input to pause the program. 
+            Console.ReadLine(); // Reads the user's input to pause the program. 
 
             }
         }
     }
-}
+
 
