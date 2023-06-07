@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace PROG6221_Part1
 {
     internal class Program
     {
-        static void Main(string[] args)
+        
+          static void Main(string[] args)
         {
             RecipeCollection rc = new RecipeCollection();  // Create an instance of the RecipeCollection class
 
@@ -43,7 +43,6 @@ namespace PROG6221_Part1
                     break;  // Exit the loop and quit the program
                 }
             }
-
 
             Console.ReadLine(); // Reads the user's input to pause the program. 
 

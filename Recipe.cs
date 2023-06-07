@@ -12,10 +12,11 @@ namespace PROG6221_Part1
 {
     internal class Recipe
     {
-        public string RecipeName { get; set; }  // Name of the recipe
-        public List<Ingredient> Ingredients { get; set; }  // List of ingredients in the recipe
-        public List<string> Steps { get; set; }  // List of steps to prepare the recipe
-        public List<double> OriginalQuantities { get; set; } //public double array to store the original quantities of each ingredient
+        
+        public string RecipeName { get; set; }              // Name of the recipe
+        public List<Ingredient> Ingredients { get; set; }   // List of ingredients in the recipe
+        public List<string> Steps { get; set; }             // List of steps to prepare the recipe
+        public List<double> OriginalQuantities { get; set; } //public double array to store the original quantities of each ingredient 
 
         public Recipe(string name) // Constructor for the Recipe class, Initializes a new instance of the Recipe class with the specified name
         {
@@ -44,7 +45,6 @@ namespace PROG6221_Part1
         {
             Steps.Add(step); // Assigns the specified description string to the specified index in the Steps array
         }
-
 
         public void ScaleRecipe()
         {
@@ -105,15 +105,23 @@ namespace PROG6221_Part1
 
             for (int i = 0; i < Ingredients.Count; i++)  // Iterate over each ingredient in the Ingredients list using a for loop
             {
-                Ingredient ingredient = Ingredients[i]; // Retrieve the current ingredient at the index
+                Ingredient ingredient = Ingredients[i];  // Retrieve the current ingredient at the index
                 Console.WriteLine($"- {ingredient.Quantity} {ingredient.Unit} {ingredient.Name} ");
             }
 
-            Console.WriteLine("\nSteps:"); // Display the steps of the recipe
+            Console.WriteLine("\nRecipe Information:");
+            for (int i = 0; i < Ingredients.Count; i++)  // Iterate over each ingredient in the Ingredients list using a for loop
+            {
+                Ingredient ingredient = Ingredients[i];  // Retrieve the current ingredient at the index
+                Console.WriteLine($"Ingredient: {ingredient.Name}");
+                Console.WriteLine($"Calories: {ingredient.Calories}");                            // Display the calories of the ingredient
+                Console.WriteLine($"Food Group: {ingredient.FoodGroup}\n");                       // Display the food group of the ingredient 
+            }
 
+            Console.WriteLine("\nSteps:");
             for (int i = 0; i < Steps.Count; i++) // Iterate over each step in the Steps list using a for loop
             {
-                string step = Steps[i]; // Retrieve the current step at the index
+                string step = Steps[i];                // Retrieve the current step at the index
                 Console.WriteLine($"{i + 1}. {step}"); // Display the step number and its description
             }
             Console.WriteLine("\n---------------------------------------");
@@ -163,26 +171,26 @@ namespace PROG6221_Part1
             Console.WriteLine("\n---------------------------------------" +
                                 $"\nRecipe Name: {RecipeName}\n" +
                                 "---------------------------------------");
-            Console.WriteLine("Ingredients:\n");
+            Console.WriteLine("Recipe Information:\n");
 
-            // Iterate over each ingredient in the Ingredients list
-            for (int i = 0; i < Ingredients.Count; i++)
+            for (int i = 0; i < Ingredients.Count; i++) // Iterate over each ingredient in the Ingredients list
             {
-                Ingredient ingredient = Ingredients[i]; // Retrieves the ingredient at the current index
+                Ingredient ingredient = Ingredients[i];                                           // Retrieves the ingredient at the current index
                 Console.WriteLine($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}"); // Display the name, quantity, and unit of the ingredient
-                Console.WriteLine($"Calories: {ingredient.Calories}");  // Display the calories of the ingredient
-                Console.WriteLine($"Food Group: {ingredient.FoodGroup}");// Display the food group of the ingredient
-                Console.WriteLine($"Total Calories: {GetTotalCalories()}");// Display the total calories of the recipe
+                Console.WriteLine($"Calories: {ingredient.Calories}");                            // Display the calories of the ingredient
+                Console.WriteLine($"Food Group: {ingredient.FoodGroup}\n");                       // Display the food group of the ingredient 
             }
-            Console.WriteLine("\nFood Information: ");
-            for (int i = 0; i < Ingredients.Count; i++)
-            {
-                Ingredient ingredient = Ingredients[i]; // Retrieves the ingredient at the current index
-                Console.WriteLine($"Food Group: {ingredient.FoodGroup}");// Display the food group of the ingredient
-                Console.WriteLine($"Total Calories: {GetTotalCalories()}");// Display the total calories of the recipe
-            }
+
+
+            Console.WriteLine($"Total Calories: {GetTotalCalories()}\n" + // Display the total calories of the recipe
+                              $"---------------------------------------");
+            Console.WriteLine("As a guide: The average man needs 2,500kcal a day, " +
+                             "Whereas the average woman needs 2,000kcal a day.\n " +
+                             "\n This could be different based on your:\n- Age\n- Weight\n- Height\n- How much exercise you do." +
+                             "\n---------------------------------------");
 
             Console.WriteLine("\nSteps:");
+
             for (int i = 0; i < Steps.Count; i++) // Iterate over each step in the Steps list
             {
                 Console.WriteLine($"{i + 1}. {Steps[i]}");// Display the step number and description
@@ -197,8 +205,30 @@ namespace PROG6221_Part1
             {
                 totalCalories += ingredient.Calories;
             }
-
             return totalCalories;
+        }
+
+        public void SelectFoodGroup()
+        {
+            Console.WriteLine("\n Options");
+            Console.WriteLine(" Fruits");
+            Console.WriteLine(" Vegetables");
+            Console.WriteLine(" Grains");
+            Console.WriteLine(" Protein");
+            Console.WriteLine(" Dairy");
+            Console.WriteLine(" Fats and Oils\n");
+        }
+
+        public void CalorieInformation()
+        {
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------" +
+                              "\nCalories are a measurement of the amount of energy that is contained in foods or drinks\n" +
+                              "-----------------------------------------------------------------------------------------------------------");
+
+            /*(2023) NHS choices. 
+             * Available at: https://www.nhs.uk/live-well/healthy-weight/managing-your-weight/understanding-calories/ 
+             * (Accessed: 07 June 2023). 
+             */
         }
 
     }
