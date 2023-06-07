@@ -11,39 +11,29 @@ namespace PROG6221_Part1
     {
         private List<Recipe> recipes; // Private field to store the list of recipes
 
-
         public RecipeCollection()// Constructor to initialize the recipe collection
         {
             recipes = new List<Recipe>(); // Creates an empty list of recipes
-        }
 
-        /*Author: Doyle, B. (2016) 
-          title of the book: C♯ Programming: From problem analysis to program design.Boston, MA: Cengage Learning. pg 477
-          accessed:  2 june 2023
-          */
-
-
-        // Delegate declaration for notifying the user about recipe calories
-        public delegate void NotifyUserDelegate(string recipeName, int totalCalories);
-        /*Author: Doyle, B. (2016) 
-            title of the book: C♯ Programming: From problem analysis to program design.Boston, MA: Cengage Learning. pg 686-690
-            accessed:  6 june 2023
-        */
-
-        public void HandleCalorieExceeded(string recipeName, int totalCalories)
-        {
-            Console.WriteLine($"Warning: The recipe '{recipeName}' has exceeded 300 calories. Total calories: {totalCalories}");
+            /*Author: Doyle, B. (2016) 
+              title of the book: C♯ Programming: From problem analysis to program design.Boston, MA: Cengage Learning. pg 477
+              accessed:  2 june 2023
+            */
         }
 
         public void EnterRecipe()
         {
-            Console.WriteLine("\nEnter the name of the recipe:");
+            Console.WriteLine("\nWhat is the name of the recipe:");
             string name = Console.ReadLine(); // Read the name of the recipe from the user
 
             Recipe recipe = new Recipe(name); // Create a new Recipe object with the entered name
 
-            Console.WriteLine("Enter the number of ingredients:");
+            Console.WriteLine("\nEnter the number of ingredients:");
             int numIngredients = int.Parse(Console.ReadLine()); // Read the number of ingredients from the user
+
+            Console.WriteLine("\nEnter the number of steps:");
+            int numSteps = int.Parse(Console.ReadLine()); // Read the number of steps from the user
+
 
             for (int i = 0; i < numIngredients; i++)
             {
@@ -59,49 +49,56 @@ namespace PROG6221_Part1
                 Console.WriteLine($"Enter the number of calories for ingredient {i + 1}:");
                 int calories = int.Parse(Console.ReadLine()); // Read the number of calories for the ingredient from the user
 
-               
-                recipe.SetNotifyUserHandler(HandleCalorieExceeded); // Set the notification handler for calorie exceedance
-
                 Console.WriteLine($"Enter the food group for ingredient {i + 1}:");
                 string foodGroup = Console.ReadLine(); // Read the food group for the ingredient from the user
 
                 recipe.AddIngredient(ingredientName, quantity, unit, calories, foodGroup); // Add the ingredient to the recipe
+                recipe.OriginalQuantities.Add(quantity);  // Store the original quantity in the OriginalQuantities list
             }
-
-
-            Console.WriteLine("Enter the number of steps:");
-            int numSteps = int.Parse(Console.ReadLine()); // Read the number of steps from the user
 
             for (int i = 0; i < numSteps; i++)
             {
-                Console.WriteLine($"Enter step {i + 1}:");
+                Console.WriteLine($"\nEnter step {i + 1}:");
                 string step = Console.ReadLine(); // Read the description of the step from the user
 
                 recipe.AddStep(step); // Add the step to the recipe
             }
 
+
+            int totalCalories = recipe.GetTotalCalories();   // Check if the total calories exceed 300
+            if (totalCalories > 300)
+            {
+                NotifyUserExceededCalories(recipe.RecipeName, totalCalories);
+            }
+
+            recipe.PrintRecipe();
             recipe.ScaleRecipe(); //scale method
-
-
+            recipe.ResetQuantities();
+            recipe.ClearRecipe();
             recipes.Add(recipe); // Add the recipe to the list of recipes
-            Console.WriteLine("Recipe added successfully!");
-
-        
-
-        // Check if the total calories exceed 300
-        int totalCalories = recipe.GetTotalCalories(); // Calculate the total calories of the recipe
-
-            //if (totalCalories > 300)
-           // {
-                //NotifyUserDelegate(recipe.RecipeName, totalCalories); // Notify the user if the total calories exceed 300
-            //}
+            Console.WriteLine("\nRecipe added successfully!");
         }
 
-        
+
+
+
+        public delegate void NotifyUserDelegate(string recipeName, int totalCalories); // Delegate declaration for notifying the user about recipe calories
+        /*Author: Doyle, B. (2016) 
+            title of the book: C♯ Programming: From problem analysis to program design.Boston, MA: Cengage Learning. pg 686-690
+            accessed:  6 june 2023
+        */
+        public void HandleCalorieExceeded(string recipeName, int totalCalories)
+        {
+            Console.WriteLine($"Warning: The recipe '{recipeName}' has exceeded 300 calories. Total calories: {totalCalories}");
+        }
+
+
+
+
 
         // Display the list of recipes to the user
         public void DisplayRecipeList()
-        { 
+        {
             if (recipes.Count == 0) // Checks if there are any recipes in the recipes list.
             {
                 Console.WriteLine("No recipes found.");
@@ -110,7 +107,7 @@ namespace PROG6221_Part1
 
             Console.WriteLine("\nRecipe List:"); // Print the heading for the recipe list
             recipes.Sort((r1, r2) => r1.RecipeName.CompareTo(r2.RecipeName));// Sorts the recipes list in alphabetical order by comparing the recipe names using the CompareTo method.
-            
+
             /*Author: Doyle, B. (2016) 
               title of the book: C♯ Programming: From problem analysis to program design.Boston, MA: Cengage Learning. pg 415-417
               accessed:  02 june 2023
@@ -121,23 +118,28 @@ namespace PROG6221_Part1
               */
 
 
-            // Display the list of recipes to the user
-            for (int i = 0; i < recipes.Count; i++)
+
+            for (int i = 0; i < recipes.Count; i++)  // Display the list of recipes to the user
             {
-                // Retrieves recipe at the current index
-                Recipe recipe = recipes[i];
 
-                // Print the name of the recipe
-                Console.WriteLine(recipe.RecipeName);
+                Recipe recipe = recipes[i];  // Retrieves recipe at the current index
+
+
+                Console.WriteLine(recipe.RecipeName);   // Print the name of the recipe
             }
-
-            Console.WriteLine("Press any key to display the commands");
         }
-        
+
+        // Notify the user when a recipe exceeds 300 calories
+        public void NotifyUserExceededCalories(string recipeName, int totalCalories)
+        {
+            Console.WriteLine($"\nWarning!!!: The recipe '{recipeName}' has exceeded 300 calories." +
+                              $"\nTotal calories: {totalCalories}");
+        }
+
+
         public void DisplayRecipe(string RecipeName)// Display a specific recipe to the user
         {
-            // Find the recipe with the matching name (case-insensitive)
-            Recipe recipe = recipes.Find(r => r.RecipeName.ToLower() == RecipeName.ToLower());
+            Recipe recipe = recipes.Find(r => r.RecipeName.ToLower() == RecipeName.ToLower());  // Find the recipe with the matching name (case-insensitive)
             /*
              * C#: Array.find() method (2022) GeeksforGeeks.
              * Available at: https://www.geeksforgeeks.org/c-sharp-array-find-method/ 
@@ -150,11 +152,12 @@ namespace PROG6221_Part1
             }
 
             recipe.DisplayRecipe(); // Call the DisplayRecipe method of the Recipe class to display the recipe details
-            Console.WriteLine("Press any key to display the commands");
-        } 
-        public void NotifyUserExceededCalories(string recipeName, int totalCalories)// Notify the user when a recipe exceeds 300 calories
-        {
-            Console.WriteLine($"Warning: The recipe '{recipeName}' has exceeded 300 calories. Total calories: {totalCalories}");
+
         }
+
+        // public void NotifyUserExceededCalories(string recipeName, int totalCalories)// Notify the user when a recipe exceeds 300 calories
+        //{
+        //  Console.WriteLine($"Warning: The recipe '{recipeName}' has exceeded 300 calories. Total calories: {totalCalories}");
+        //}
     }
 }
